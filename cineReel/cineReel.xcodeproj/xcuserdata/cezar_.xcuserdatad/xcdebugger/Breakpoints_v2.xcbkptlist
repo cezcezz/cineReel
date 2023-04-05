@@ -7,64 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F418E018-755D-4E6F-AC9E-2808320B3CA4"
+            uuid = "9E7E0CE6-7B72-4B19-A42E-55E9D65B08BD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "cineReel/FilmCell.swift"
+            filePath = "cineReel/Network/APIProtocols.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "set(film:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "RequestExecutor"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2609F64-ED14-48FB-AC56-1906A8EF7C43"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "cineReel/Network/NetworkController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "get(type:url:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F418E018-755D-4E6F-AC9E-2808320B3CA4 - b5f270e37a0f493f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cineReel.FilmCell.set(film: cineReel.Film) -&gt; ()"
-                  moduleName = "cineReel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cezar_/Desktop/cineReel/cineReel/cineReel/FilmCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "192">
-               </Location>
-               <Location
-                  uuid = "F418E018-755D-4E6F-AC9E-2808320B3CA4 - b5f270e37a0f493f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cineReel.FilmCell.set(film: cineReel.Film) -&gt; ()"
-                  moduleName = "cineReel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cezar_/Desktop/cineReel/cineReel/cineReel/FilmCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "292">
-               </Location>
-               <Location
-                  uuid = "F418E018-755D-4E6F-AC9E-2808320B3CA4 - b5f270e37a0f493f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "cineReel.FilmCell.set(film: cineReel.Film) -&gt; ()"
-                  moduleName = "cineReel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cezar_/Desktop/cineReel/cineReel/cineReel/FilmCell.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "776">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -11,7 +11,7 @@ class FilmCell: UITableViewCell {
 
     //var filmViewModel: FilmViewModel
 
-    var filmImageView = UIImageView()
+    var filmImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
     var filmTitleLabel = UILabel()
     var filmYearLabel = UILabel()
     var filmRatingLabel = UILabel()
@@ -33,13 +33,14 @@ class FilmCell: UITableViewCell {
 
     func set(film: Film) {
 
-        guard let url = URL(string: film.image) else { return }
+
+        guard let url = URL(string: "\(Tmdb.imageBaseUrl)\(film.posterPath)") else { return }
+
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching image: \(error.localizedDescription)")
                 return
             }
-
             guard let data = data, let image = UIImage(data: data) else {
                 print("Error parsing image data")
                 return
@@ -73,9 +74,10 @@ class FilmCell: UITableViewCell {
 
     func setImageConstraints() {
         filmImageView.translatesAutoresizingMaskIntoConstraints = false
-        filmImageView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        filmImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
+
+        filmImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        filmImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65).isActive = true
 
         //filmImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     //    filmImageView.widthAnchor.constraint(equalTo: filmImageView.heightAnchor, multiplier: 60).isActive = true
@@ -83,10 +85,10 @@ class FilmCell: UITableViewCell {
 
     func setTitleLabelConstrints() {
         filmTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+
         filmTitleLabel.topAnchor.constraint(equalTo: filmImageView.topAnchor).isActive = true
         filmTitleLabel.leadingAnchor.constraint(equalTo: filmImageView.trailingAnchor, constant: 16).isActive = true
-        filmTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        filmTitleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        //filmTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        filmTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
     }
-
 }

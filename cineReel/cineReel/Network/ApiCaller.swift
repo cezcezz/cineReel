@@ -7,10 +7,15 @@
 
 import Foundation
 
-enum RequestError: Error {
+enum APIError: Error {
     case decode
+    case invalidResponse
+    case badRequest
+    case parseError
+    case unAuthorised
     case invalidURL
-    case noResponse
+    case notFound
+    case serverError
     case unauthorized
     case unexpectedStatusCode
     case unknown
@@ -19,10 +24,23 @@ enum RequestError: Error {
         switch self {
         case .decode:
             return "Decode error"
+        case .badRequest:
+            return "Bad request"
         case .unauthorized:
             return "Session expired"
         default:
             return "Unknown error"
+        }
+    }
+}
+
+enum ParseError: Error, LocalizedError {
+    case parserError(reason: String)
+
+    var errorDescription: String? {
+        switch self {
+        case .parserError(let reason):
+            return reason
         }
     }
 }
