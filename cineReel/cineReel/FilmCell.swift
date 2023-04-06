@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FilmCell: UITableViewCell {
 
@@ -32,26 +33,10 @@ class FilmCell: UITableViewCell {
     }
 
     func set(film: Film) {
-
-
         guard let url = URL(string: "\(Tmdb.imageBaseUrl)\(film.posterPath)") else { return }
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error fetching image: \(error.localizedDescription)")
-                return
-            }
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Error parsing image data")
-                return
-            }
-
-            DispatchQueue.main.async {
-                self.filmImageView.image = image
-            }
-        }
-        task.resume()
-        filmTitleLabel.text = film.title
+        self.filmImageView.kf.indicatorType = .activity
+        self.filmImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "heart.fill"), options: [.transition(.fade(0.666))])
+        self.filmTitleLabel.text = film.title
     }
 
     func configureImage() {
@@ -77,7 +62,7 @@ class FilmCell: UITableViewCell {
 
         filmImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         filmImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65).isActive = true
+        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5625).isActive = true
 
         //filmImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     //    filmImageView.widthAnchor.constraint(equalTo: filmImageView.heightAnchor, multiplier: 60).isActive = true

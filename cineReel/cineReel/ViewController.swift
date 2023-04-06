@@ -116,7 +116,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == films.count - 3 {
-            input.send(.listWillEnd(page: 3))
+            input.send(.listWillEnd(page: films.count/20))
             }
     }
 

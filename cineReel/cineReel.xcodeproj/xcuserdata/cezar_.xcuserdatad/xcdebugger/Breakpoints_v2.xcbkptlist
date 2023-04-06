@@ -23,17 +23,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A2609F64-ED14-48FB-AC56-1906A8EF7C43"
+            uuid = "4D6642BC-34C8-4F4B-9AF5-3BEBA9A87D32"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "cineReel/Network/NetworkController.swift"
+            filePath = "cineReel/FilmListIntent.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "get(type:url:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "getFilmList(page:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4D6642BC-34C8-4F4B-9AF5-3BEBA9A87D32 - a50d8fc8584da477"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cineReel.FilmListIntent.getFilmList(page: Swift.Int) -&gt; ()"
+                  moduleName = "cineReel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cezar_/Desktop/cineReel/cineReel/cineReel/FilmListIntent.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  uuid = "4D6642BC-34C8-4F4B-9AF5-3BEBA9A87D32 - d5bd9a378a945b05"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Combine.Subscribers.Completion&lt;Swift.Error&gt;) -&gt; () in cineReel.FilmListIntent.getFilmList(page: Swift.Int) -&gt; ()"
+                  moduleName = "cineReel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cezar_/Desktop/cineReel/cineReel/cineReel/FilmListIntent.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

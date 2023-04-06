@@ -24,7 +24,7 @@ class FilmListIntent {
             case .viewDidAppear:
                 self.getFilmList(page: 1)
             case .listWillEnd(page: let page):
-                self.getFilmList(page: page)
+                self.getFilmList(page: 2)
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
