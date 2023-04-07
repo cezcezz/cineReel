@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C90540DD29DAB7D80066529F /* APIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90540DC29DAB7D80066529F /* APIProtocols.swift */; };
+		C90540DF29DAB8190066529F /* WebAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90540DE29DAB8190066529F /* WebAPIClient.swift */; };
+		C905412429DC2AE30066529F /* FilmListIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C905412329DC2AE30066529F /* FilmListIntent.swift */; };
 		C905FA8A29CDE0A700308593 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C905FA8929CDE0A700308593 /* ApiCaller.swift */; };
 		C905FA9229CDE2FA00308593 /* RawRepresentable+rawValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C905FA9129CDE2FA00308593 /* RawRepresentable+rawValue.swift */; };
 		C905FA9429CDE57C00308593 /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C905FA9329CDE57C00308593 /* RawRepresentable.swift */; };
@@ -15,7 +18,11 @@
 		C961F36229CD87A5003958D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C961F36129CD87A5003958D2 /* ViewController.swift */; };
 		C961F36729CD87A7003958D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C961F36629CD87A7003958D2 /* Assets.xcassets */; };
 		C962E87429CDC7EF001A3DC7 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C962E87329CDC7EF001A3DC7 /* TabBar.swift */; };
-		C962E87829CDDD9B001A3DC7 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = C962E87729CDDD9B001A3DC7 /* Api.swift */; };
+		C962E87829CDDD9B001A3DC7 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C962E87729CDDD9B001A3DC7 /* APIEndpoints.swift */; };
+		C98A631029DD541A0032856D /* ListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98A630F29DD541A0032856D /* ListResponse.swift */; };
+		C98A631429DD99760032856D /* NetworkControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98A631329DD99760032856D /* NetworkControllerType.swift */; };
+		C98A631629DD99950032856D /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98A631529DD99950032856D /* NetworkController.swift */; };
+		C98A631A29DDD5060032856D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C98A631929DDD5060032856D /* Kingfisher */; };
 		C9B0E1E429D1BDE3007EDCD5 /* FilmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B0E1E329D1BDE3007EDCD5 /* FilmModel.swift */; };
 		C9B0E1E629D1C0DF007EDCD5 /* UIVIew+anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B0E1E529D1C0DF007EDCD5 /* UIVIew+anchors.swift */; };
 		C9B0E1E929D1C523007EDCD5 /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B0E1E829D1C523007EDCD5 /* FilmCell.swift */; };
@@ -24,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C90540DC29DAB7D80066529F /* APIProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocols.swift; sourceTree = "<group>"; };
+		C90540DE29DAB8190066529F /* WebAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPIClient.swift; sourceTree = "<group>"; };
+		C905412329DC2AE30066529F /* FilmListIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmListIntent.swift; sourceTree = "<group>"; };
 		C905FA8929CDE0A700308593 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
 		C905FA9129CDE2FA00308593 /* RawRepresentable+rawValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+rawValue.swift"; sourceTree = "<group>"; };
 		C905FA9329CDE57C00308593 /* RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
@@ -34,8 +44,11 @@
 		C961F36629CD87A7003958D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C961F36B29CD87A7003958D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C962E87329CDC7EF001A3DC7 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		C962E87729CDDD9B001A3DC7 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		C9B0E1E329D1BDE3007EDCD5 /* FilmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilmModel.swift; path = ../../FilmModel.swift; sourceTree = "<group>"; };
+		C962E87729CDDD9B001A3DC7 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		C98A630F29DD541A0032856D /* ListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponse.swift; sourceTree = "<group>"; };
+		C98A631329DD99760032856D /* NetworkControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerType.swift; sourceTree = "<group>"; };
+		C98A631529DD99950032856D /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		C9B0E1E329D1BDE3007EDCD5 /* FilmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmModel.swift; sourceTree = "<group>"; };
 		C9B0E1E529D1C0DF007EDCD5 /* UIVIew+anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+anchors.swift"; sourceTree = "<group>"; };
 		C9B0E1E829D1C523007EDCD5 /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
 		C9B0E1EA29D1C5FB007EDCD5 /* FilmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewModel.swift; sourceTree = "<group>"; };
@@ -47,16 +60,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C98A631A29DDD5060032856D /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C905412229DC2A8F0066529F /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				C905412329DC2AE30066529F /* FilmListIntent.swift */,
+			);
+			name = Intents;
+			sourceTree = "<group>";
+		};
 		C905FA8B29CDE1C200308593 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C9B0E1E329D1BDE3007EDCD5 /* FilmModel.swift */,
+				C98A631229DD72680032856D /* trash */,
+				C98A630F29DD541A0032856D /* ListResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -64,8 +87,12 @@
 		C905FA8C29CDE1DC00308593 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C962E87729CDDD9B001A3DC7 /* APIEndpoints.swift */,
 				C905FA8929CDE0A700308593 /* ApiCaller.swift */,
-				C962E87729CDDD9B001A3DC7 /* Api.swift */,
+				C90540DC29DAB7D80066529F /* APIProtocols.swift */,
+				C90540DE29DAB8190066529F /* WebAPIClient.swift */,
+				C98A631329DD99760032856D /* NetworkControllerType.swift */,
+				C98A631529DD99950032856D /* NetworkController.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -110,14 +137,31 @@
 		C961F35C29CD87A5003958D2 /* cineReel */ = {
 			isa = PBXGroup;
 			children = (
-				C9B0E1EA29D1C5FB007EDCD5 /* FilmViewModel.swift */,
 				C9B0E1E729D1C1A5007EDCD5 /* Support */,
 				C905FA9029CDE2BE00308593 /* Extensions */,
 				C905FA8C29CDE1DC00308593 /* Network */,
-				C905FA8B29CDE1C200308593 /* Models */,
 				C905FA8F29CDE1F800308593 /* Views */,
+				C98A631129DD72210032856D /* States */,
+				C905FA8B29CDE1C200308593 /* Models */,
+				C905412229DC2A8F0066529F /* Intents */,
 			);
 			path = cineReel;
+			sourceTree = "<group>";
+		};
+		C98A631129DD72210032856D /* States */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		C98A631229DD72680032856D /* trash */ = {
+			isa = PBXGroup;
+			children = (
+				C9B0E1EA29D1C5FB007EDCD5 /* FilmViewModel.swift */,
+				C9B0E1E329D1BDE3007EDCD5 /* FilmModel.swift */,
+			);
+			path = trash;
 			sourceTree = "<group>";
 		};
 		C9B0E1E729D1C1A5007EDCD5 /* Support */ = {
@@ -147,6 +191,9 @@
 			dependencies = (
 			);
 			name = cineReel;
+			packageProductDependencies = (
+				C98A631929DDD5060032856D /* Kingfisher */,
+			);
 			productName = cineReel;
 			productReference = C961F35A29CD87A5003958D2 /* cineReel.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +222,9 @@
 				Base,
 			);
 			mainGroup = C961F35129CD87A5003958D2;
+			packageReferences = (
+				C98A631829DDD5050032856D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = C961F35B29CD87A5003958D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,8 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C962E87829CDDD9B001A3DC7 /* Api.swift in Sources */,
+				C98A631029DD541A0032856D /* ListResponse.swift in Sources */,
+				C98A631629DD99950032856D /* NetworkController.swift in Sources */,
+				C962E87829CDDD9B001A3DC7 /* APIEndpoints.swift in Sources */,
 				C9B0E1E629D1C0DF007EDCD5 /* UIVIew+anchors.swift in Sources */,
+				C905412429DC2AE30066529F /* FilmListIntent.swift in Sources */,
+				C98A631429DD99760032856D /* NetworkControllerType.swift in Sources */,
+				C90540DD29DAB7D80066529F /* APIProtocols.swift in Sources */,
+				C90540DF29DAB8190066529F /* WebAPIClient.swift in Sources */,
 				C961F36229CD87A5003958D2 /* ViewController.swift in Sources */,
 				C961F35E29CD87A5003958D2 /* AppDelegate.swift in Sources */,
 				C905FA9429CDE57C00308593 /* RawRepresentable.swift in Sources */,
@@ -409,6 +465,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C98A631829DDD5050032856D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C98A631929DDD5060032856D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C98A631829DDD5050032856D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C961F35229CD87A5003958D2 /* Project object */;
 }

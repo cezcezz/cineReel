@@ -6,15 +6,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FilmCell: UITableViewCell {
 
     //var filmViewModel: FilmViewModel
 
-    var filmImageView = UIImageView()
+    var filmImageView = UIImageView(image: UIImage(systemName: "heart.fill"))
     var filmTitleLabel = UILabel()
-    var filmYearLabel = UILabel()
-    var filmRatingLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,27 +30,32 @@ class FilmCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+
     func set(film: Film) {
+        guard let path = film.posterPath else { return }
+        guard let url = URL(string: "\(Tmdb.imageBaseUrl)\(path)") else { return }
 
-        guard let url = URL(string: film.image) else { return }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error fetching image: \(error.localizedDescription)")
-                return
-            }
-
-            guard let data = data, let image = UIImage(data: data) else {
-                print("Error parsing image data")
-                return
-            }
-
-            DispatchQueue.main.async {
-                self.filmImageView.image = image
+        self.filmImageView.kf.indicatorType = .activity
+        self.filmImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "heart.fill"), options: [.transition(.fade(0.666))]) { [weak self] result in
+            switch result {
+            case .success:
+                self?.filmTitleLabel.text = film.title
+            case .failure:
+                // Set the title label even if the image fails to load
+                self?.filmTitleLabel.text = film.title
             }
         }
-        task.resume()
-        filmTitleLabel.text = film.title
     }
+
+
+//    func set(film: Film) {
+//        guard let path = film.posterPath else { return }
+//        guard let url = URL(string: "\(Tmdb.imageBaseUrl)\(path)") else { return }
+//        self.filmImageView.kf.indicatorType = .activity
+//        self.filmImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "heart.fill"), options: [.transition(.fade(0.666))])
+//        self.filmTitleLabel.text = film.title
+//    }
 
     func configureImage() {
         filmImageView.layer.cornerRadius = 8
@@ -63,30 +67,21 @@ class FilmCell: UITableViewCell {
         filmTitleLabel.adjustsFontSizeToFitWidth = true
     }
 
-    func configureYearLabel() {
-
-    }
-
-    func configureRatingLabel() {
-
-    }
-
     func setImageConstraints() {
         filmImageView.translatesAutoresizingMaskIntoConstraints = false
-        filmImageView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        filmImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8).isActive = true
-        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
 
-        //filmImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-    //    filmImageView.widthAnchor.constraint(equalTo: filmImageView.heightAnchor, multiplier: 60).isActive = true
+        filmImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        filmImageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        filmImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        filmImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5625).isActive = true
+
     }
 
     func setTitleLabelConstrints() {
         filmTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+
         filmTitleLabel.topAnchor.constraint(equalTo: filmImageView.topAnchor).isActive = true
         filmTitleLabel.leadingAnchor.constraint(equalTo: filmImageView.trailingAnchor, constant: 16).isActive = true
-        filmTitleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        filmTitleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        filmTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
     }
-
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension RawRepresentable where RawValue == String, Self: API {
+extension RawRepresentable where RawValue == String, Self: ApiEndpoints {
 
     var url: URL {
         Self.baseUrl.appendingPathComponent(rawValue)
