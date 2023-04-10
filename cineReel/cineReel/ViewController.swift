@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         }
     }
 
-    var input: PassthroughSubject<FilmListState, Never> = .init()
+    var input: PassthroughSubject<FilmListEvent, Never> = .init()
 
     let tableView = UITableView()
     let searchBar = UISearchBar()
@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        input.send(.init(films: [], page: 1, status: .start))
         configureTableView()
         addedImageOnBar()
         searchBar.delegate = self
@@ -42,6 +41,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        input.send(.viewDidLoad)
     //    input.send()
     }
     //MARK: - MVI WorkFlow
@@ -51,16 +51,20 @@ class ViewController: UIViewController {
 
         output
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] event in
-                switch event {
-                case .viewDidLoad:
-                    print("viewDidLoad")
+            .sink { [unowned self] status in
+                switch status.status {
+                case .start:
+                    films = status.films
+                case .loadingFilmList: break
+                case .fetchFilmsDidSuccessful(let newFilms):
+                    if viewModel.getPage() > 1 {
+                        self.films.append(contentsOf: newFilms)
+                    } else {
+                        self.films = newFilms
+                    }
                 case .fetchFilmsDidFail(let error):
-                    print("!!!!!!!-!_!_!__!_!_!_!_-1_!\(error.localizedDescription)")
-                case .fetchFilmsDidSuccessful(let films):
-                    self.films = films
-                default:
-                    break
+                    let alert = UIAlertController(title: "error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }.store(in: &cancellable)
     }
@@ -78,6 +82,14 @@ class ViewController: UIViewController {
     func setTableViewDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchBar.endEditing(true)
     }
 
     private func addedImageOnBar() {
@@ -122,14 +134,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == films.count - 3 {
-            input.send(.init(films: self.films, page: self.currentPage, status: .scrolledDown))
+            input.send(.scrolledDown)
             }
     }
 }
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        input.send(.init(films: self.films, page: self.currentPage, status: .searching(text: searchText)))
+        input.send(.searching(text: searchText))
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -19,17 +19,14 @@ struct FilmListState {
 
 enum FilmListStatus {
     case start
-    case loadingFilmList/*(/*requestTupe: RequestType = .popularFilmList, page: Int*)*/*/
+    case loadingFilmList
     case fetchFilmsDidSuccessful(films: [Film])
-    case scrolledDown
     case fetchFilmsDidFail(error: Error)
-    case searching(text: String)
 }
 
 enum FilmListEvent {
     case viewDidLoad
     case fetchFilmsDidFail(Error)
-    case fetchFilmsDidSuccessful([Film])
     case filmSelected(filmId: Int)
     case scrolledDown
     case searching(text: String)

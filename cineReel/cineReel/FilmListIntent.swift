@@ -11,34 +11,38 @@ import Combine
 class FilmListIntent {
 
     private let network: NetworkControllerType
-    private let output: PassthroughSubject<FilmListEvent, Never> = .init()
+    private let output: PassthroughSubject<FilmListState, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
     private var currentPage = 1
+    private var isSearching: Bool = false
+    private var searchingText: String?
 
     init(network:NetworkControllerType = NetworkController()) {
         self.network = network
     }
 
-    func transform(input: AnyPublisher<FilmListState, Never>) -> AnyPublisher<FilmListEvent, Never> {
-        input.sink { [unowned self] event in
-            switch event.status {
-            case .start:
+    func transform(input: AnyPublisher<FilmListEvent, Never>) -> AnyPublisher<FilmListState, Never> {
+        input.sink { [unowned self] input in
+            switch input {
+            case .viewDidLoad:
                 self.getFilmList(page: 1)
-            case .loadingFilmList:
-                self.getFilmList(page: event.page)
+            case .fetchFilmsDidFail(let error):
+                output.send(.init(status: .fetchFilmsDidFail(error: error)))
+            case .filmSelected(let filmId): break
             case .scrolledDown:
-                var mutatingEvent = event
-                currentPage = currentPage + 1
-                mutatingEvent.page = event.page + 1
-                self.getFilmList(page: currentPage)
-            case .fetchFilmsDidSuccessful(let films):
-                var mutatingEvent = event
-                mutatingEvent.films.append(contentsOf: films)
-            case .fetchFilmsDidFail(error: _): break
+                self.currentPage = currentPage + 1
+                getFilmSearchList(page: currentPage)
+                output.send(.init(page: currentPage, status: .loadingFilmList))
             case .searching(let text):
+                if text == "" {
+                    searchingText = nil
+                } else {
+                    searchingText = text
+                }
                 currentPage = 1
-                self.getFilmSearchList(query: text, page: currentPage)
+                getFilmSearchList(query: searchingText, page: currentPage)
+                output.send(.init(page: currentPage, status: .loadingFilmList))
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
@@ -52,18 +56,26 @@ class FilmListIntent {
         return searchText
     }
 
-    private func getFilmSearchList(query: String, page: Int) {
+    func getPage() -> Int {
+        return currentPage
+    }
+
+    private func getFilmSearchList(query: String? = nil, page: Int) {
+
+        guard let query = searchingText else {
+            getFilmList(page: page)
+            return
+        }
+
         let url = URL(string:
                         "https://api.themoviedb.org/3/search/movie?api_key=815b63b537c380370911f6cb083031b0&query=\(query)&page=\(page)")!
         network.get(type: ListResponse.self, url: url).sink { [weak self] completion  in
             if case .failure(let error) = completion {
-                self?.output.send(.fetchFilmsDidFail(error))
+                self?.output.send(.init(status: .fetchFilmsDidFail(error: error)))
             }
         } receiveValue: { [weak self] films  in
-
-           self?.output.send(.fetchFilmsDidSuccessful(films.results))
+            self?.output.send(.init(page: page, status: .fetchFilmsDidSuccessful(films: films.results)))
         }.store(in: &cancellables)
-
     }
 
     private func getFilmList(page: Int) {
@@ -71,54 +83,12 @@ class FilmListIntent {
 
         network.get(type: ListResponse.self, url: url).sink { [weak self] completion  in
             if case .failure(let error) = completion {
-                self?.output.send(.fetchFilmsDidFail(error))
+                self?.output.send(.init(status: .fetchFilmsDidFail(error: error)))
+                //(.fetchFilmsDidFail(error))
             }
         } receiveValue: { [weak self] films  in
-            self?.output.send(.fetchFilmsDidSuccessful(films.results))
+            self?.output.send(.init(page: page, status: .fetchFilmsDidSuccessful(films: films.results)))
+            //(.fetchFilmsDidSuccessful(films.results))
         }.store(in: &cancellables)
     }
-
-    
 }
-
-//extension FilmListIntent {
-//    static func reducer(state: inout FilmListState, event: FilmListEvent) -> FilmListState {
-//        switch state.status {
-//        case .start:
-//            switch event {
-//            case .viewDidLoad:
-//                state.status = .loadingFilmList
-//            default:
-//                return state
-//            }
-//        case .loadingFilmList:
-//            switch event {
-//            case .fetchFilmsDidFail(let error):
-//                state.status = .fetchFilmsDidFail(error: error)
-//            case .fetchFilmsDidSuccessful(let films):
-//                return .init(films: films, page: state.page, status: .fetchFilmsDidSuccessful(films: films))
-//            default:
-//                return state
-//            }
-//        case .fetchFilmsDidSuccessful(let films):
-//            var stateMutating = state
-//            stateMutating.films.append(contentsOf: films)
-//            return state
-//        case .scrolledDown:
-//            switch event {
-//            case .fetchFilmsDidFail(let error):
-//                return .init(films: [], page: state.page + 1, status: .fetchFilmsDidFail(error: error))
-//            case .fetchFilmsDidSuccessful(let films):
-//                return .init(films: films, page: state.page + 1, status: .fetchFilmsDidSuccessful(films: films))
-//            default:
-//                return state
-//            }
-//        case .fetchFilmsDidFail(_):
-//            return state
-//        case .searching(let text):
-//            print("State--searching \t \(text)")
-//            return state
-//        }
-//        return state
-//    }
-//}
