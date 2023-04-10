@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     let viewModel = FilmListIntent()
     let networkController = NetworkController()
-    var cancellable = Set<AnyCancellable>()
+    var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     var currentPage: Int = 1
 
     var films = [Film]() {
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         }
     }
 
-    private let input: PassthroughSubject<FilmListIntent.State, Never> = .init()
+    var input: PassthroughSubject<FilmListState, Never> = .init()
 
     let tableView = UITableView()
     let searchBar = UISearchBar()
@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        input.send(.init(films: [], page: 1, status: .start))
         configureTableView()
         addedImageOnBar()
         searchBar.delegate = self
@@ -41,7 +42,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        input.send(.begining)
+    //    input.send()
     }
     //MARK: - MVI WorkFlow
 
@@ -52,17 +53,14 @@ class ViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] event in
                 switch event {
-                case .fetchFilmsDidSuccessful(let films):
-                    if currentPage == 1 {
-                        self.films = films
-                    } else {
-                        self.films += films
-                        print("films")
-                    }
-                case .filmSelected(let filmId):
-                    print("filmSelected")
+                case .viewDidLoad:
+                    print("viewDidLoad")
                 case .fetchFilmsDidFail(let error):
                     print("!!!!!!!-!_!_!__!_!_!_!_-1_!\(error.localizedDescription)")
+                case .fetchFilmsDidSuccessful(let films):
+                    self.films = films
+                default:
+                    break
                 }
             }.store(in: &cancellable)
     }
@@ -124,21 +122,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == films.count - 3 {
-            self.currentPage = 1 + films.count/20
-            input.send(.loadingFilmList(page: self.currentPage))
+            input.send(.init(films: self.films, page: self.currentPage, status: .scrolledDown))
             }
     }
 }
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        let filteredFilms = viewModel.filterFilms(films, with: searchText)
-//        navigationItem.title = filteredFilms
-        input.send(.searchDidTap(query: searchText, page: currentPage))
+        input.send(.init(films: self.films, page: self.currentPage, status: .searching(text: searchText)))
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        input.send(.begining)
         searchBar.text = nil
         searchBar.resignFirstResponder()
         print("searchBarCancelButtonClicked")
