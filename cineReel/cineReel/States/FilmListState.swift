@@ -8,11 +8,7 @@
 import Foundation
 
 struct FilmListState {
-    var films: [Film] = [Film]() {
-        didSet {
-            self.films = oldValue + films
-        }
-    }
+    var films: [Film] = [Film]() 
     var page: Int = 1
     var status: FilmListStatus = .start
 }

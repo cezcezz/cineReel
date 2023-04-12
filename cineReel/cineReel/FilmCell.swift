@@ -30,8 +30,6 @@ class FilmCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-
     func set(film: Film) {
         guard let path = film.posterPath else { return }
         guard let url = URL(string: "\(Tmdb.imageBaseUrl)\(path)") else { return }
